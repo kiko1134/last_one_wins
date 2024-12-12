@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last One Wins</title>
+<!--    <link rel="stylesheet" href="../../css/styles.css">-->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #4b0082, #800080);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .main-container {
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+        }
+
+        .game-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background-color: #FFD700;
+            color: #4b0082;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #e5c100;
+            transform: scale(1.05);
+        }
+
+        .cta-button:focus {
+            outline: 2px solid #FFD700;
+            outline-offset: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <h1 class="game-title">Last One Wins</h1>
+    <a href="/register" class="cta-button">Join a Game</a>
+</div>
+</body>
+</html>
