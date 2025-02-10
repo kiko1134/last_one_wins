@@ -1,3 +1,4 @@
+```
 ./
 ├── client/                  # Frontend частта
 │   ├── src/
@@ -33,3 +34,4 @@
 ├── CONTRIBUTING.md          # Насоки за принос към проекта
 ├── LICENSE                  
 └── README.md                
+```
