@@ -1,107 +1,3 @@
-/*body {*/
-/*    margin: 0;*/
-/*    font-family: Arial, sans-serif;*/
-/*    background-color: #f9f9f9;*/
-/*    color: #333;*/
-/*}*/
-
-/*.main-container {*/
-/*    position: relative;*/
-/*    height: 100vh;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*.background-image {*/
-/*    position: absolute;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
-/*    z-index: -1;*/
-/*}*/
-
-/*.scrolling-text {*/
-/*    text-align: center;*/
-/*    color: white;*/
-/*    animation: scroll 10s linear infinite;*/
-/*}*/
-
-/*@keyframes scroll {*/
-/*    0% { transform: translateY(100%); }*/
-/*    100% { transform: translateY(-100%); }*/
-/*}*/
-
-/*.footer {*/
-/*    position: fixed;*/
-/*    bottom: 0;*/
-/*    width: 100%;*/
-/*    text-align: center;*/
-/*    !*background-color: #4caf50;*!*/
-/*    padding: 1rem;*/
-/*}*/
-
-/*.join-button {*/
-/*    background-color: white;*/
-/*    color: #4caf50;*/
-/*    border: none;*/
-/*    border-radius: 5px;*/
-/*    padding: 10px 20px;*/
-/*    font-size: 1rem;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.join-button:hover {*/
-/*    background-color: #45a049;*/
-/*    color: white;*/
-/*}*/
-
-/*!* Registration Page Styles *!*/
-/*.register-container {*/
-/*    height: 100vh;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    background-color: #f9f9f9;*/
-/*}*/
-
-/*.register-form {*/
-/*    background-color: white;*/
-/*    border: 1px solid #ddd;*/
-/*    border-radius: 10px;*/
-/*    padding: 2rem;*/
-/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-/*    text-align: center;*/
-/*    width: 300px;*/
-/*}*/
-
-/*.register-form h1 {*/
-/*    margin-bottom: 1rem;*/
-/*}*/
-
-/*.register-form input {*/
-/*    width: 100%;*/
-/*    padding: 0.5rem;*/
-/*    margin-bottom: 1rem;*/
-/*    border: 1px solid #ddd;*/
-/*    border-radius: 5px;*/
-/*}*/
-
-/*.enter-button {*/
-/*    background-color: #4caf50;*/
-/*    color: white;*/
-/*    border: none;*/
-/*    border-radius: 5px;*/
-/*    padding: 10px 20px;*/
-/*    font-size: 1rem;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.enter-button:hover {*/
-/*    background-color: #45a049;*/
-/*}*/
-
 /* Основен ресет */
 * {
     box-sizing: border-box;
@@ -115,13 +11,11 @@ body {
     padding: 10px;
 }
 
-/* Заглавна част */
 header {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Основен контейнер */
 #game-container {
     max-width: 800px;
     margin: 0 auto;
@@ -130,14 +24,12 @@ header {
     border: 1px solid #ccc;
 }
 
-/* Област за нотификации */
 #notification {
     margin-bottom: 15px;
     color: #d9534f;
     text-align: center;
 }
 
-/* Област за въпроси и отговори */
 #question-section {
     text-align: center;
     margin-bottom: 20px;
@@ -160,14 +52,12 @@ header {
     margin-left: 10px;
 }
 
-/* Област за таймера */
 #timer-section {
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.2em;
 }
 
-/* Област за играчи */
 #players-section {
     display: flex;
     justify-content: space-around;
@@ -192,7 +82,6 @@ header {
     cursor: pointer;
 }
 
-/* Област за избор на тема */
 #topic-section {
     margin: 20px 0;
     text-align: center;
@@ -211,7 +100,6 @@ header {
     cursor: pointer;
 }
 
-/* Стилове за модален прозорец (Scoreboard) */
 .modal {
     position: fixed;
     z-index: 100;

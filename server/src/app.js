@@ -18,10 +18,6 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(config.STATIC_DIR));
 
-// View engine settings
-app.set('views', config.VIEWS_DIR);
-app.set('view engine', config.VIEW_ENGINE);
-
 // Routes usage
 app.use('/', indexRoutes);
 app.use('/', authRoutes);   // For /register and /login
