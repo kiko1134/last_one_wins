@@ -1,6 +1,6 @@
-const {questionsDB} = require("../server/src/models/data");
+import { questionsDB } from "../server/src/models/data.js";
 
-function prepareNextQuestion(game) {
+export const prepareNextQuestion = (game) => {
     const currentRoundKey = `round${game.currentRound}`;
     // If there is next question for the current topic
     if (
@@ -31,5 +31,3 @@ function prepareNextQuestion(game) {
     game.players.forEach(player => player.eliminated = false);
     return true;
 }
-
-module.exports = {prepareNextQuestion};

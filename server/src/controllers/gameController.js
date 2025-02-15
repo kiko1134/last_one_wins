@@ -1,7 +1,7 @@
-const { games } = require('../models/data');
-const { generateGameID } = require('../utils/helpers');
+import { games } from '../models/data.js';
+import { generateGameID } from '../utils/helpers.js';
 
-exports.createGame = (req, res) => {
+export function createGame(req, res) {
     const { players } = req.body; // Expects array of objects: [{ username: "Player1" }, ...]
     if (!players || players.length < 1) {
         return res.status(400).json({ error: "Необходими са поне 1 играч" });
@@ -17,4 +17,4 @@ exports.createGame = (req, res) => {
         buzzerLockedBy: null
     };
     res.json({ success: true, gameID });
-};
+}

@@ -1,4 +1,4 @@
-function processAnswer(game, questionsDB, data) {
+export const processAnswer = (game, questionsDB, data) => {
     const { username, answer, round, topic, questionID } = data;
     const roundKey = `round${round}`;
     if (
@@ -24,10 +24,8 @@ function processAnswer(game, questionsDB, data) {
     }
 }
 
-function endGame(io, game) {
+export const endGame = (io, game) => {
     const sortedPlayers = game.players.slice().sort((a, b) => b.score - a.score);
     const winner = sortedPlayers[0].username;
     io.to(game.gameID).emit('gameEnded', { scores: sortedPlayers, winner });
 }
-
-module.exports = { processAnswer, endGame };

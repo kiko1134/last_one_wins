@@ -1,7 +1,7 @@
-const { games, questionsDB } = require('../models/data');
-const { prepareNextQuestion, processAnswer, endGame } = require('../services/gameService');
+import { games, questionsDB } from '../models/data.js';
+import { prepareNextQuestionService, processAnswerService, endGameService } from '../services/gameService.js';
 
-module.exports = (io) => {
+export default (io) => {
     io.on('connection', (socket) => {
         console.log('Нов клиент се свърза:', socket.id);
 
@@ -72,14 +72,14 @@ module.exports = (io) => {
         });
 
         socket.on('submitAnswer', (data) => {
-            const result = processAnswer(data);
+            const result = processAnswerService(data);
             io.to(data.gameID).emit('answerResult', result);
             if (games[data.gameID]) {
                 games[data.gameID].buzzerLockedBy = null;
                 io.to(data.gameID).emit('buzzerReset');
                 if (result.correct) {
                     let game = games[data.gameID];
-                    if (prepareNextQuestion(game)) {
+                    if (prepareNextQuestionService(game)) {
                         const roundKey = `round${game.currentRound}`;
                         const questionData = questionsDB[roundKey].topics[game.currentTopic].questions[game.currentQuestion];
                         io.to(data.gameID).emit('nextQuestion', {
@@ -90,7 +90,7 @@ module.exports = (io) => {
                             time: 30
                         });
                     } else {
-                        endGame(io, data.gameID);
+                        endGameService(io, data.gameID);
                     }
                 } else {
                     // If the answer is wrong - resume the timer for the current question
@@ -104,7 +104,7 @@ module.exports = (io) => {
             if (!games[gameID]) return;
             let game = games[gameID];
             game.buzzerLockedBy = null;
-            if (prepareNextQuestion(game)) {
+            if (prepareNextQuestionService(game)) {
                 const roundKey = `round${game.currentRound}`;
                 const questionData = questionsDB[roundKey].topics[game.currentTopic].questions[game.currentQuestion];
                 io.to(gameID).emit('nextQuestion', {
@@ -115,7 +115,7 @@ module.exports = (io) => {
                     time: 30
                 });
             } else {
-                endGame(io, gameID);
+                endGameService(io, gameID);
             }
         });
 

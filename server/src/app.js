@@ -1,22 +1,23 @@
-const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
-const bodyParser = require('body-parser');
-const { join } = require('path');
+import express, { urlencoded, static as static_ } from 'express';
+import { createServer } from 'http';
+import { Server as SocketServer } from 'socket.io';
+import pkg from 'body-parser';
+const { json } = pkg;
 
-const config = require('./config/config');
-const indexRoutes = require('./routes/index');
-const authRoutes = require('./routes/auth');
-const gameRoutes = require('./routes/game');
-
+import { STATIC_DIR_CLIENT, STATIC_DIR_GAME_LOGIC, PORT } from './config/config.js';
+import indexRoutes from './routes/index.js';
+import authRoutes from './routes/auth.js';
+import gameRoutes from './routes/game.js';
+import socketController from './controllers/socketController.js';
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+const server = createServer(app);
+const io = new SocketServer(server); // Socket.io initialization
 
 // Middleware
-app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(config.STATIC_DIR));
+app.use(json());
+app.use(urlencoded({ extended: true }));
+app.use(static_(STATIC_DIR_CLIENT));
+app.use("/game-logic", static_(STATIC_DIR_GAME_LOGIC));
 
 // Routes usage
 app.use('/', indexRoutes);
@@ -24,8 +25,8 @@ app.use('/', authRoutes);   // For /register and /login
 app.use('/game', gameRoutes); // For /game/create
 
 // Socket.io events initialization
-require('./controllers/socketController')(io);
+socketController(io);
 
-server.listen(config.PORT, () => {
-    console.log(`Сървърът работи на порт ${config.PORT}`);
+server.listen(PORT, () => {
+    console.log(`Сървърът работи на порт ${PORT}`);
 });

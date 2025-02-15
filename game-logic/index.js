@@ -1,6 +1,6 @@
-import { Timer } from './timer.js';
-import { prepareNextQuestion } from './state.js';
-import { processAnswer, endGame } from './scoring.js';
+import { Timer } from './timer.mjs';
+import { prepareNextQuestion } from './state.mjs';
+import { processAnswer, endGame } from './scoring.mjs';
 
 export {
     Timer,

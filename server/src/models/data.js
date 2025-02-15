@@ -1,7 +1,7 @@
-const games = {};
-const users = {};
+export const games = {};
+export const users = {};
 
-const questionsDB = {
+export const questionsDB = {
     round1: {
         topics: {
             1: {
@@ -39,5 +39,3 @@ const questionsDB = {
         }
     }
 };
-
-module.exports = { games, users, questionsDB };
