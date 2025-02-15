@@ -1,5 +1,5 @@
 import { API } from './api.js';
-import { Timer } from './utils/timer.js';
+import { Timer } from '../../../game-logic';
 import { showNotification, displayScoreboard, closeScoreboardModal } from './ui/notifications.js';
 import { updateQuestionText, resetAnswerInput, disableAnswering, enableBuzzer, enableAnswering } from './ui/gameUI.js';
 
@@ -13,7 +13,7 @@ let currentQuestionID = 1;
 let isEliminated = false;
 
 const timerElement = document.getElementById('timer');
-let gameTimer = new Timer(timerElement, 30, onTimeUp);
+const gameTimer = new Timer(timerElement, 30, onTimeUp);
 
 let myUsername = prompt("Въведете вашето потребителско име:");
 while (!myUsername || myUsername.trim() === "") {
@@ -34,8 +34,7 @@ socket.on('gameStarted', data => {
     updateQuestionText(data.question);
     isEliminated = false;
     enableBuzzer();
-    gameTimer = new Timer(timerElement, data.time || 30, onTimeUp);
-    gameTimer.start();
+    gameTimer.reset(data.time || 30, onTimeUp);
     resetAnswerInput();
     showNotification("Играта започна!");
 });
@@ -65,8 +64,7 @@ socket.on('nextQuestion', data => {
     currentQuestionID = data.questionID;
     updateQuestionText(data.question);
     isEliminated = false;
-    gameTimer = new Timer(timerElement, data.time || 30, onTimeUp);
-    gameTimer.start();
+    gameTimer.reset(data.time || 30, onTimeUp);
     enableBuzzer();
     resetAnswerInput();
     showNotification("Ново питане!");

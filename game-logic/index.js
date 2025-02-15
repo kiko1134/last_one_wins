@@ -1,11 +1,10 @@
-const { prepareNextQuestion } = require('./state');
-const { processAnswer, endGame } = require('./scoring');
-const { startTimer, stopTimer } = require('./timer');
+import { Timer } from './timer.js';
+import { prepareNextQuestion } from './state.js';
+import { processAnswer, endGame } from './scoring.js';
 
-module.exports = {
+export {
+    Timer,
     prepareNextQuestion,
     processAnswer,
     endGame,
-    startTimer,
-    stopTimer,
 };

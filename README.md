@@ -44,8 +44,6 @@
 
 - **Backend:**
     - Node.js, Express
-    - (Опционално) MongoDB или друга база данни
-    - Тестове с Jest или Mocha
 - **Frontend:**
     - HTML5, CSS3, JavaScript (Vanilla JS)
     - Fetch API или WebSocket за комуникация
