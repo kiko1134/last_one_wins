@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Last One Wins</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-<header>
-    <h1>Last One Wins</h1>
-</header>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Последният печели!</h1>
+    </header>
 
-<main id="game-container">
     <!-- Notification section -->
-    <div id="notification"></div>
-
-    <!-- Question - answer section -->
-    <section id="question-section">
-        <h2 id="question-text">Въпросът ще се появи тук...</h2>
-        <input type="text" id="answer-input" placeholder="Въведи отговор" disabled>
-        <button id="submit-answer" disabled>Изпрати отговор</button>
-    </section>
-
-    <!-- Timer section -->
-    <section id="timer-section">
-        <p>Оставащо време: <span id="timer">30</span> секунди</p>
-    </section>
-
-    <!-- Buzzer btn section -->
-    <section id="buzzer-section">
-        <button id="buzzer-button">Заключи отговора</button>
-    </section>
-
-    <!-- Modal window for the final results (scoreboard) -->
-    <div id="scoreboard-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Краен резултат</h2>
-            <div id="scoreboard-content"></div>
-        </div>
+    <div id="notification-container">
+      <p id="notification"></p>
     </div>
-</main>
 
-<!-- Power the Socket.IO and the core client script (usage of ES6 modules) -->
-<script src="/socket.io/socket.io.js"></script>
-<script type="module" src="js/main.js"></script>
-</body>
+    <div id="code-container">
+      <h2>Код за играта:</h2>
+      <div id="code-section">
+        <p id="code">Генериране...</p>
+        <button id="copy-to-clipboard">Copy</button>
+      </div>
+    </div>
+
+    <div id="game-container">
+      <!-- Question - answer section -->
+      <div id="question-section">
+        <h2 id="question-text">Въпросът ще се появи тук...</h2>
+        <input
+          type="text"
+          id="answer-input"
+          placeholder="Въведи отговор"
+          disabled
+        />
+        <div id="game-buttons">
+          <button id="submit-answer" disabled>Изпрати отговор</button>
+          <button id="buzzer-button" disabled>Заключи отговора</button>
+        </div>
+      </div>
+
+      <!-- Timer section -->
+      <section id="timer-section">
+        <p>Оставащо време: <span id="timer">30</span> секунди</p>
+      </section>
+
+      <!-- Modal window for the final results (scoreboard) -->
+      <div id="scoreboard-modal" class="modal" style="display: none">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Краен резултат</h2>
+          <div id="scoreboard-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Power the Socket.IO and the core client script (usage of ES6 modules) -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </body>
 </html>

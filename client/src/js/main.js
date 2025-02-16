@@ -11,9 +11,11 @@ import {
   disableAnswering,
   enableBuzzer,
   enableAnswering,
+  insertGameId,
+  showQuestionsModal
 } from "./ui/gameUI.js";
 
-// const { Timer } = timer;
+const { Timer } = timer;
 
 const socket = io();
 
@@ -25,7 +27,7 @@ let currentQuestionID = 1;
 let isEliminated = false;
 
 const timerElement = document.getElementById("timer");
-const gameTimer = new timer.Timer(timerElement, 30, onTimeUp);
+const gameTimer = new Timer(timerElement, 30, onTimeUp);
 
 let myUsername = prompt("Въведете вашето потребителско име:");
 while (!myUsername || myUsername.trim() === "") {
@@ -44,6 +46,7 @@ socket.on("connect", () => {
 });
 
 socket.on("gameStarted", (data) => {
+  showQuestionsModal();
   currentRound = data.round;
   currentTopic = data.topic;
   currentQuestionID = data.questionID;
@@ -149,10 +152,11 @@ window.addEventListener("click", (event) => {
 });
 
 // Start or join game
-if (inputGameID && inputGameID.trim() !== "") {
+if (inputGameID?.trim()) {
   gameID = inputGameID.trim();
   socket.emit("joinGame", { gameID, username: myUsername });
   showNotification("Присъединявате се към играта. Изчаквайте стартирането...");
+  insertGameId(gameID);
 } else {
   API.createGame(myUsername)
     .then((data) => {
@@ -161,6 +165,7 @@ if (inputGameID && inputGameID.trim() !== "") {
         console.log("Игра създадена с ID:", gameID);
         socket.emit("joinGame", { gameID, username: myUsername });
         showNotification("Играта е създадена. Изчаквайте други играчи...");
+        insertGameId(gameID);
       } else {
         console.error("Грешка при създаване на игра:", data.error);
       }
