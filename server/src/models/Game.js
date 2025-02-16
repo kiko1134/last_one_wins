@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import AutoIncrementFactory from 'mongoose-sequence';
+// import AutoIncrementFactory from 'mongoose-sequence';
 
 // const AutoIncrement = AutoIncrementFactory(mongoose);
 
