@@ -113,7 +113,6 @@ export default (io) => {
             let game = games[gameID];
             game.buzzerLockedBy = null;
             if (prepareNextQuestionService(game)) {
-                const roundKey = `round${game.currentRound}`;
                 const questionData = game.questions[game.currentQuestion];
                 io.to(gameID).emit('nextQuestion', {
                     question: questionData.title,

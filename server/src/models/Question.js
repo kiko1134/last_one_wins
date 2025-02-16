@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import AutoIncrementFactory from 'mongoose-sequence';
+// import AutoIncrementFactory from 'mongoose-sequence';
 
-const AutoIncrement = AutoIncrementFactory(mongoose);
+// const AutoIncrement = AutoIncrementFactory(mongoose);
 
 const QuestionSchema = new mongoose.Schema({
     title: { type: String, required: true },
