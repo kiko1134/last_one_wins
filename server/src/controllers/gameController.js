@@ -9,7 +9,7 @@ export function createGame(req, res) {
     const gameID = generateGameID();
     games[gameID] = {
         gameID,
-        players: players.map(p => ({ username: p.username, score: 0, eliminated: false })),
+        players: players.map(p => ({ id: p.id, username: p.username, score: 0, eliminated: false })),
         currentRound: 1,
         currentTopic: 1,  // Start topic
         currentQuestion: null,

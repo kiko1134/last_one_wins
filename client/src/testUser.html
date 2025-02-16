@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test User Registration</title>
+</head>
+<body>
+<h1>Register a New User</h1>
+<form id="userForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="text" id="password" placeholder="Password" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" placeholder="Email" required>
+    <br>
+    <button type="submit" id="submitToDB">Submit to DB</button>
+</form>
+<div id="result"></div>
+
+<script>
+    document.getElementById('userForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value;
+
+        console.log(username,password,email);
+
+        try {
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, email })
+            });
+            const result = await response.json();
+            document.getElementById('result').textContent = result.message;
+        } catch (err) {
+            document.getElementById('result').textContent = 'Error: ' + err.message;
+        }
+    });
+</script>
+</body>
+</html>

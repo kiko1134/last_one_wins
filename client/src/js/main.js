@@ -154,7 +154,7 @@ window.addEventListener("click", (event) => {
 // Start or join game
 if (inputGameID?.trim()) {
   gameID = inputGameID.trim();
-  socket.emit("joinGame", { gameID, username: myUsername });
+  socket.emit("joinGame", { gameID, username: myUsername});
   showNotification("Присъединявате се към играта. Изчаквайте стартирането...");
   insertGameId(gameID);
 } else {
