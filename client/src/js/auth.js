@@ -12,12 +12,11 @@ export const getUser = async () => {
 
 export const login = async (email, password) => {
   try {
-    const response = await fetch("/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      return await fetch("/auth/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({email, password}),
     });
-    return response.json();
   } catch (err) {
     console.error("Error logging in:", err);
     throw err;

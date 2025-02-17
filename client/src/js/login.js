@@ -17,11 +17,11 @@ submitButton.addEventListener("click", async () => {
 
   try {
     const response = await login(email, password);
-    console.log("response: ", response);
+    // console.log("response: ", response);
     if (response.status === 200) {
-      showNotification("Успешен вход!");
       window.location.href = "/game";
-    } else showNotification(response.message);
+      showNotification("Успешен вход!")
+    } else showNotification(response.statusText);
   } catch (err) {
     showNotification(err.message);
     console.error(err);
