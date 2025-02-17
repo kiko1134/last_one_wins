@@ -1,62 +1,147 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="bg">-->
+<!--  <head>-->
+<!--    <meta charset="UTF-8" />-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+<!--    <title>Last One Wins</title>-->
+<!--    <link rel="stylesheet" href="css/styles.css" />-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    <header>-->
+<!--      <h1>Последният печели!</h1>-->
+<!--    </header>-->
+
+<!--    &lt;!&ndash; Notification section &ndash;&gt;-->
+<!--    <div id="notification-container">-->
+<!--      <p id="notification"></p>-->
+<!--    </div>-->
+
+<!--    <div id="code-container">-->
+<!--      <h2>Код за играта:</h2>-->
+<!--      <div id="code-section">-->
+<!--        <p id="code">Генериране...</p>-->
+<!--        <button id="copy-to-clipboard">Copy</button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div id="game-container">-->
+<!--      &lt;!&ndash; Question - answer section &ndash;&gt;-->
+<!--      <div id="question-section">-->
+<!--        <h2 id="question-text">Въпросът ще се появи тук...</h2>-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          id="answer-input"-->
+<!--          placeholder="Въведи отговор"-->
+<!--          disabled-->
+<!--        />-->
+<!--        <div id="game-buttons">-->
+<!--          <button id="submit-answer" disabled>Изпрати отговор</button>-->
+<!--          <button id="buzzer-button" disabled>Заключи отговора</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Timer section &ndash;&gt;-->
+<!--      <section id="timer-section">-->
+<!--        <p>Оставащо време: <span id="timer">30</span> секунди</p>-->
+<!--      </section>-->
+
+<!--      &lt;!&ndash; Modal window for the final results (scoreboard) &ndash;&gt;-->
+<!--      <div id="scoreboard-modal" class="modal" style="display: none">-->
+<!--        <div class="modal-content">-->
+<!--          <span class="close">&times;</span>-->
+<!--          <h2>Краен резултат</h2>-->
+<!--          <div id="scoreboard-content"></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Power the Socket.IO and the core client script (usage of ES6 modules) &ndash;&gt;-->
+<!--    <script src="/socket.io/socket.io.js"></script>-->
+<!--    <script type="module" src="js/main.js"></script>-->
+<!--  </body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="bg">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Last One Wins</title>
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Последният печели!</h1>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Last One Wins</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<header>
+  <h1>Последният печели!</h1>
+</header>
 
-    <!-- Notification section -->
-    <div id="notification-container">
-      <p id="notification"></p>
+<!-- Game Code Section (shown only for the creator) -->
+<div id="code-container">
+  <h2>Код на играта:</h2>
+  <div id="code-section">
+    <p id="code">Генериране...</p>
+    <button id="copy-to-clipboard">Копирай</button>
+  </div>
+</div>
+
+<!-- Full Game Interface (shown only for joiners) -->
+<div id="game-container">
+  <!-- Question & Answer Section -->
+  <div id="question-section">
+    <h2 id="question-text">Въпросът ще се появи тук...</h2>
+    <input
+            type="text"
+            id="answer-input"
+            placeholder="Въведете отговор"
+            disabled
+    />
+    <div id="game-buttons">
+      <button id="submit-answer" disabled>Изпрати отговор</button>
+      <button id="buzzer-button" disabled>Заключи отговора</button>
     </div>
+  </div>
 
-    <div id="code-container">
-      <h2>Код за играта:</h2>
-      <div id="code-section">
-        <p id="code">Генериране...</p>
-        <button id="copy-to-clipboard">Copy</button>
-      </div>
+  <!-- Timer Section -->
+  <section id="timer-section">
+    <p>Оставащо време: <span id="timer">30</span> секунди</p>
+  </section>
+
+  <!-- Modal for Scoreboard -->
+  <div id="scoreboard-modal" class="modal" style="display: none">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Краен резултат</h2>
+      <div id="scoreboard-content"></div>
     </div>
+  </div>
+</div>
 
-    <div id="game-container">
-      <!-- Question - answer section -->
-      <div id="question-section">
-        <h2 id="question-text">Въпросът ще се появи тук...</h2>
-        <input
-          type="text"
-          id="answer-input"
-          placeholder="Въведи отговор"
-          disabled
-        />
-        <div id="game-buttons">
-          <button id="submit-answer" disabled>Изпрати отговор</button>
-          <button id="buzzer-button" disabled>Заключи отговора</button>
-        </div>
-      </div>
+<!-- Socket.IO and scripts -->
+<script src="/socket.io/socket.io.js"></script>
+<script type="module">
+  // Parse URL parameters
+  const params = new URLSearchParams(window.location.search);
+  const gameID = params.get("gameID");
+  const isCreator = params.has("creator");
 
-      <!-- Timer section -->
-      <section id="timer-section">
-        <p>Оставащо време: <span id="timer">30</span> секунди</p>
-      </section>
+  if (!gameID) {
+    console.error("Няма зададен gameID в URL. Пренасочване към game.html.");
+    window.location.href = "/game.html";
+  }
 
-      <!-- Modal window for the final results (scoreboard) -->
-      <div id="scoreboard-modal" class="modal" style="display: none">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Краен резултат</h2>
-          <div id="scoreboard-content"></div>
-        </div>
-      </div>
-    </div>
+  // Set the game code text in the code container
+  document.getElementById("code").textContent = gameID;
 
-    <!-- Power the Socket.IO and the core client script (usage of ES6 modules) -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="module" src="js/main.js"></script>
-  </body>
+  // Show/hide UI sections based on whether the user is the creator
+  if (isCreator) {
+    // Game creator: show only the code container; hide the full game interface
+    document.getElementById("game-container").style.display = "none";
+  } else {
+    // Joiners: hide the code container with copy button; show full game interface
+    document.getElementById("code-container").style.display = "none";
+  }
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
 </html>
+
+

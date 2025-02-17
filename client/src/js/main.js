@@ -20,7 +20,7 @@ const { Timer } = timer;
 
 const socket = io();
 
-// Global state
+// // Global state
 let gameID = null;
 let currentRound = 1;
 let currentTopic = 1;
@@ -31,7 +31,7 @@ const timerElement = document.getElementById("timer");
 const gameTimer = new Timer(timerElement, 30, onTimeUp);
 let currentUser = null;
 
-const inputGameID = null;
+// const inputGameID = null;
 
 // Socket.IO events handlers
 
@@ -152,23 +152,26 @@ window.addEventListener("click", (event) => {
 });
 
 // Start or join game
-if (inputGameID?.trim()) {
-  gameID = inputGameID.trim();
-  socket.emit("joinGame", { gameID, username: currentUser.username });
-  showNotification("Присъединявате се към играта. Изчаквайте стартирането...");
-  insertGameId(gameID);
-} else {
-  API.createGame(currentUser.username)
-    .then((data) => {
-      if (data.success) {
-        gameID = data.gameID;
-        console.log("Игра създадена с ID:", gameID);
-        socket.emit("joinGame", { gameID, username: currentUser.username });
-        showNotification("Играта е създадена. Изчаквайте други играчи...");
-        insertGameId(gameID);
-      } else {
-        console.error("Грешка при създаване на игра:", data.error);
-      }
-    })
-    .catch((err) => console.error(err));
-}
+// if (inputGameID?.trim()) {
+//   gameID = inputGameID.trim();
+//   socket.emit("joinGame", { gameID, username: currentUser.username });
+//   showNotification("Присъединявате се към играта. Изчаквайте стартирането...");
+//   insertGameId(gameID);
+// } else {
+//   API.createGame(currentUser.username)
+//     .then((data) => {
+//       if (data.success) {
+//         gameID = data.gameID;
+//         console.log("Игра създадена с ID:", gameID);
+//         socket.emit("joinGame", { gameID, username: currentUser.username });
+//         showNotification("Играта е създадена. Изчаквайте други играчи...");
+//         insertGameId(gameID);
+//       } else {
+//         console.error("Грешка при създаване на игра:", data.error);
+//       }
+//     })
+//     .catch((err) => console.error(err));
+// }
+
+
+

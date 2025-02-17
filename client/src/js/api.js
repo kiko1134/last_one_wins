@@ -1,10 +1,10 @@
 export const API = {
-  createGame: async (username) => {
+  createGame: async (user) => {
     try {
       const res = await fetch("/game/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ players: [{ username }] }),
+        body: JSON.stringify({ players: [ user ] }),
       });
       return res.json();
     } catch (err) {
@@ -24,18 +24,4 @@ export const API = {
       throw err;
     }
   },
-};
-
-export const createGame = async (username) => {
-  try {
-    const res = await fetch("/game/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ players: [{ username }] }),
-    });
-    return res.json();
-  } catch (err) {
-    console.error("Error creating game:", err);
-    throw err;
-  }
 };

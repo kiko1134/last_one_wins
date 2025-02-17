@@ -20,7 +20,8 @@
     <div id="game-container">
         <h1>Започнте игра:</h1>
         <div>
-            <input type="text" id="game-code" placeholder="Въведете кода на играта" />
+            <label for="game-code">Код за играта: </label>
+            <label for="game-code"></label><input type="text" id="game-code" name="game-code" placeholder="Въведете кода на играта" />
             <button id="join-game">Присъединете се към игра</button>
             <br />
             <br />
@@ -33,5 +34,6 @@
 
     <!-- Power the Socket.IO and the core client script (usage of ES6 modules) -->
     <script type="module" src="js/game.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
   </body>
 </html>

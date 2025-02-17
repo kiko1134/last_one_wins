@@ -2,7 +2,8 @@ import { games } from '../models/data.js';
 import { generateGameID } from '../utils/helpers.js';
 
 export function createGame(req, res) {
-    const { players } = req.body; // Expects array of objects: [{ username: "Player1" }, ...]
+    const { players } = req.body;
+    console.log('players:', players)// Expects array of objects: [{ username: "Player1" }, ...]
     if (!players || players.length < 1) {
         return res.status(400).json({ error: "Необходими са поне 1 играч" });
     }
