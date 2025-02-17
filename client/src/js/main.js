@@ -14,6 +14,7 @@ import {
   insertGameId,
   showQuestionsModal
 } from "./ui/gameUI.js";
+import { getUser } from "./auth.js";
 
 const { Timer } = timer;
 
@@ -28,21 +29,20 @@ let isEliminated = false;
 
 const timerElement = document.getElementById("timer");
 const gameTimer = new Timer(timerElement, 30, onTimeUp);
+let currentUser = null;
 
-let myUsername = prompt("Въведете вашето потребителско име:");
-while (!myUsername || myUsername.trim() === "") {
-  myUsername = prompt(
-    "Моля, въведете валидно потребителско име (не може да е празно):"
-  );
-}
-const inputGameID = prompt(
-  "Въведете id на игра (ако имате), или оставете празно за нова игра:"
-);
+const inputGameID = null;
 
 // Socket.IO events handlers
 
-socket.on("connect", () => {
-  console.log("Свързан със Socket.IO:", socket.id);
+socket.on("connect", async () => {
+  console.log("Свързан сте към сървъра на играта.");
+  currentUser = await getUser();
+  console.log("Текущ потребител:", currentUser);
+  if (!currentUser) {
+    console.error("Не сте влезли в системата!");
+    throw new Error("Не сте влезли в системата!");
+  }
 });
 
 socket.on("gameStarted", (data) => {
@@ -60,7 +60,7 @@ socket.on("gameStarted", (data) => {
 
 socket.on("buzzerLocked", (data) => {
   gameTimer.stop();
-  if (data.username !== myUsername) {
+  if (data.username !== currentUser.username) {
     disableAnswering();
     showNotification(`Играчът ${data.username} заключи отговора.`);
   } else {
@@ -98,7 +98,7 @@ socket.on("answerResult", (data) => {
       showNotification(
         `${data.username} отговори грешно и е елиминиран за този рунд!`
       );
-      if (data.username === myUsername) {
+      if (data.username === currentUser.username) {
         isEliminated = true;
         disableAnswering();
       }
@@ -126,14 +126,14 @@ function onTimeUp() {
 // Click handlers from the UI
 
 document.getElementById("buzzer-button").addEventListener("click", () => {
-  socket.emit("lockAnswer", { gameID, username: myUsername });
+  socket.emit("lockAnswer", { gameID, username: currentUser.username });
 });
 
 document.getElementById("submit-answer").addEventListener("click", () => {
   const answer = document.getElementById("answer-input").value;
   socket.emit("submitAnswer", {
     gameID,
-    username: myUsername,
+    username: currentUser.username,
     answer: answer,
     round: currentRound,
     topic: currentTopic,
@@ -154,16 +154,16 @@ window.addEventListener("click", (event) => {
 // Start or join game
 if (inputGameID?.trim()) {
   gameID = inputGameID.trim();
-  socket.emit("joinGame", { gameID, username: myUsername});
+  socket.emit("joinGame", { gameID, username: currentUser.username });
   showNotification("Присъединявате се към играта. Изчаквайте стартирането...");
   insertGameId(gameID);
 } else {
-  API.createGame(myUsername)
+  API.createGame(currentUser.username)
     .then((data) => {
       if (data.success) {
         gameID = data.gameID;
         console.log("Игра създадена с ID:", gameID);
-        socket.emit("joinGame", { gameID, username: myUsername });
+        socket.emit("joinGame", { gameID, username: currentUser.username });
         showNotification("Играта е създадена. Изчаквайте други играчи...");
         insertGameId(gameID);
       } else {

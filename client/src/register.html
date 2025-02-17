@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Last One Wins</title>
+    <!-- <link rel="stylesheet" href="css/auth.css" /> -->
+  </head>
+  <body>
+    <header>
+      <h1>Последният печели!</h1>
+    </header>
+
+    <!-- Notification section -->
+    <div id="notification-container">
+      <p id="notification"></p>
+    </div>
+
+    <div id="login-container">
+      <h2>Вход в играта</h2>
+      <div id="login-form">
+        <label for="email">Имейл:</label>
+        <input type="text" id="email" name="email" required />
+        <label for="username"> Потребителско име:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Парола:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit" id="submit-button">Регистрирайте</button>
+      </div>
+
+      <p>Вече имате акаунт? <a href="/login"> Влезте</a></p>
+    </div>
+
+    <script type="module" src="js/register.js"></script>
+  </body>
+</html>

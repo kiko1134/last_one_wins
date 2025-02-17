@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Last One Wins</title>
+    <link rel="stylesheet" href="css/game.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Последният печели!</h1>
+      <a id="logout">Log Out</a>
+    </header>
+
+    <!-- Notification section -->
+    <div id="notification-container">
+      <p id="notification"></p>
+    </div>
+
+    <div id="game-container">
+        <h1>Започнте игра:</h1>
+        <div>
+            <input type="text" id="game-code" placeholder="Въведете кода на играта" />
+            <button id="join-game">Присъединете се към игра</button>
+            <br />
+            <br />
+            <h2>Или</h2>
+            <br />
+            <br />
+            <button id="create-game">Създайте игра</button>
+        </div>
+    </div>
+
+    <!-- Power the Socket.IO and the core client script (usage of ES6 modules) -->
+    <script type="module" src="js/game.js"></script>
+  </body>
+</html>
