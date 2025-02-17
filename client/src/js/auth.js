@@ -35,12 +35,11 @@ export const logout = async () => {
 
 export const register = async (email, username, password) => {
   try {
-    const response = await fetch("/auth/register", {
+    return await fetch("/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, username, password }),
     });
-    return response.json();
   } catch (err) {
     console.error("Error registering:", err);
     throw err;

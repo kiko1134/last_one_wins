@@ -1,0 +1,76 @@
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url("../img/main_page.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+#notification-container {
+  width: auto;
+  display: flex;
+  justify-content: end;
+  height: 5rem;
+}
+
+#notification {
+  background-color: #2f9cf4;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+#login-container, #register-container {
+  max-width: 80%;
+  width: 40rem;
+  background-color: #fff;
+  padding: 4px;
+  border: 1px solid #ccc;
+  align-items: center;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  height: 2.5rem;
+  width: 5rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 93%;
+}
+
+input {
+  width: 90%;
+  padding: 8px;
+  font-size: 1em;
+  margin-bottom: 1rem;
+}
+
+label {
+  width: 90%;
+  display: flex;
+  justify-content: start;
+}
